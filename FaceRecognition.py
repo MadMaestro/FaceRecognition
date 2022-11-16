@@ -15,9 +15,8 @@ while True:
 
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
-        minNeighbors=5,
-        minSize=(30, 30),
+        scaleFactor=1.4,
+        minNeighbors=4,
         flags=cv2.CASCADE_SCALE_IMAGE
     )
 
@@ -27,8 +26,8 @@ while True:
 
     mouths = mouthCascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
-        minNeighbors=5,
+        scaleFactor=1.8,
+        minNeighbors=16,
         minSize=(30, 30),
         flags=cv2.CASCADE_SCALE_IMAGE
     )
@@ -39,7 +38,7 @@ while True:
 
     eyes = eyeCascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
+        scaleFactor=1.3,
         minNeighbors=5,
         minSize=(30, 30),
         flags=cv2.CASCADE_SCALE_IMAGE
