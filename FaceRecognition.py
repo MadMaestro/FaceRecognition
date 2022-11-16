@@ -10,8 +10,11 @@ video_capture = cv2.VideoCapture(0)
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
-
+    #skala szaroœci
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    #binaryzacja
+    ret2, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
 
     faces = faceCascade.detectMultiScale(
         gray,
@@ -51,6 +54,13 @@ while True:
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
+    #cv2.imshow('BinaryVideo', thresh)
+
+
+    #cv2.imshow('Video2', thresh)
+
+    #cv2.imshow('Video3', gray)
+
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
