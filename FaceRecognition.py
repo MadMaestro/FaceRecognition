@@ -1,3 +1,13 @@
+# Dysponując aktualną wiedzą (nabytą chociażby w ramach zajęć z przedmiotu Grafika Komputerowa), Państwa zadaniem jest opracowanie metody dokonującej detekcji poszczególnych cech twarzy (tj. konturu twarzy, oczu oraz ust) jak również sposobu poruszania głową. Zadanie nie polega na samodzielnym opracowaniu nowatorskiego rozwiązania (chociaż jeżeli ktoś takowe uskuteczni to będzie to jedynie pozytywnie ocenione!) ale mogą Państwo skorzystać z już gotowych detektorów (do oczu i ust) - na przykład dostępnych w ramach biblioteki OpenCV. W przypadku konturu twarzy, należy skorzystać z podstawowych operacji przetwarzania obrazów (począwszy od tradycyjnej filtracji przez binaryzację aż do operacji szkieletyzacji). W odniesieniu do "siły" ruchu głową, możemy wykorzystać gotowe biblioteki do śledzenia punktów kluczowych twarzy (np. DLib, MediaPipe), które pozwolą nam na obserwację poruszania się głowy w poszczególnych momentach czasu.
+
+# Uwaga - zadanie należy zaprezentować w real-time (nie można skorzystać z nagrań).
+
+# Reasumując:
+
+# - Kontur twarzy - realizacja przy użyciu metod przetwarzania i analizy obrazów wraz ze śledzeniem ruchu - interesuje nas w tym momencie jedynie informacja o "sile" ruchu (można do tego celu skorzystać z gotowych metod - np. poprzez zapisywanie informacji o punktach kluczowych w danym momencie czasu)
+
+# - Oczy i usta - detekcja przy użyciu gotowych do użycia metod, na przykład pochodzących z OpenCV
+
 import cv2
 import sys
 
@@ -10,9 +20,7 @@ video_capture = cv2.VideoCapture(0)
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
-
-    ret2, frame2 = video_capture.read()
-    #skala szaro�ci
+    #skala szaro�ci
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
