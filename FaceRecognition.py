@@ -10,13 +10,19 @@
 
 import cv2
 import sys
+import time
+
 
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 mouthCascade = cv2.CascadeClassifier("haarcascade_mcs_mouth.xml")
 eyeCascade = cv2.CascadeClassifier("haarcascade_eye.xml")
 
 video_capture = cv2.VideoCapture(0)
-
+t_old = time.time()
+x_old=-1
+y_old=-1
+w_old=-1 
+h_old=-1
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
@@ -33,8 +39,18 @@ while True:
     
     mainFace = 0
     # Draw a rectangle around the faces
+    
     for (x, y, w, h) in faces:
-        
+        t = time.time()
+        t_new = int(t * 1000)
+        if(t_new-t_old>50):
+            t_old=t_new
+            move=abs(x-x_old)+abs(y-y_old)+abs(w-w_old)+abs(h-h_old)
+            print(move)
+            x_old=x
+            y_old=y
+            w_old=w
+            h_old=h
         mainFace = frame[y:y+h,x:x+w]
         mainFaceGray = cv2.cvtColor(mainFace, cv2.COLOR_BGR2GRAY)
         ret2, thresh = cv2.threshold(mainFaceGray, 150, 255, cv2.THRESH_BINARY)
